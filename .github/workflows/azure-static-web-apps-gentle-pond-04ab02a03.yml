@@ -29,7 +29,8 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/src/app" # App source code path
           api_location: "/src/api" # Api source code path - optional
-          output_location: "/src/dist" # Built app content directory - optional
+          app_artifact_location: "/src/app/dist/yx-stations" # Built app content directory - optional
+          app_build_command: "yarn run build-prod"
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
