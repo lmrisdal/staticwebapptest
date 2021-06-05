@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    clientId: '%%clientid%%',
-    authority: '%%authority%%',
-    redirectUrl: '%%redirectUrl%%',
+    clientId: '__clientid__',
+    authority: '__authority__',
+    redirectUrl: '__redirectUrl__',
 };
