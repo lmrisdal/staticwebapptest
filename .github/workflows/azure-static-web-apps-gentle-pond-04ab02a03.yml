@@ -43,6 +43,8 @@ jobs:
           app_artifact_location: "dist/yx-stations" # Built app content directory - optional
           app_build_command: "yarn run build-prod"
           ###### End of Repository/Build Configurations ######
+        env:
+          test: 'test'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
