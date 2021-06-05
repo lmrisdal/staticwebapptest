@@ -4,9 +4,9 @@
 
 export const environment = {
     production: false,
-    clientId: '%%clientid%%',
-    authority: '%%authority%%',
-    redirectUrl: '%%redirectUrl%%',
+    clientId: '__clientid__',
+    authority: '__authority__',
+    redirectUrl: '__redirectUrl__',
 };
 
 /*

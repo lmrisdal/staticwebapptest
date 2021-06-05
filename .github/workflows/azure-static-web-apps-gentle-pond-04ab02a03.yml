@@ -21,13 +21,13 @@ jobs:
 
       - uses: cschleiden/replace-tokens@v1
         with:
-          tokenPrefix: "%%"
-          tokenSuffix: "%%"
+          tokenPrefix: "__"
+          tokenSuffix: "__"
           files: '["./src/app/src/environments/*.ts"]'
         env:
-          clientId: "${{ secrets.CLIENTID }}"
-          authority: "${{ secrets.AUTHORITY }}"
-          redirectUrl: "${{ secrets.REDIRECTURL }}"
+          clientId: c7c34960-82ad-400d-ba45-ddb6487aa319
+          authority: https://login.microsoftonline.com/0b933fc9-3391-4302-9d86-85fe9bb5370e/
+          redirectUrl: http://localhost:4200
 
       - name: Build And Deploy
         id: builddeploy
