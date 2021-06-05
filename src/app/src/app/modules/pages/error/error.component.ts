@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-error',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private msalService: MsalService) { }
 
   ngOnInit(): void {
   }

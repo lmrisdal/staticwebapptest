@@ -18,6 +18,17 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+
+      - uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '%%'
+          tokenSuffix: '%%'
+          files: '["./src/app/src/environments/*.ts"]'
+        env:
+          clientId: ${{ secrets.CLIENTID }}
+          authority: ${{ secrets.AUTHORITY }}
+          redirectUrl: ${{ secrets.REDIRECTURL }}
+      
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
