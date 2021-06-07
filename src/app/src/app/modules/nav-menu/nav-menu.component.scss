@@ -1,0 +1,37 @@
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.bg-white {
+    background-color: #ec1b2e !important;
+    margin-bottom: 4em !important;
+}
+
+html {
+    font-size: 14px;
+}
+
+.nav-link {
+    color: white !important;
+
+}
+
+.add-station:hover {
+    background-color: darkred !important;
+}
+
+.nav-link:hover {
+    color: darkred !important;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgb(194, 46, 61);
+}

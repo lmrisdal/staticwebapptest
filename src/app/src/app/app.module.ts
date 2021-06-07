@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+
+
 
 import {
     IPublicClientApplication,
@@ -22,6 +26,10 @@ import {
 } from '@azure/msal-angular';
 import { msalConfig } from './auth-config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavMenuComponent } from './modules/nav-menu/nav-menu.component';
+import { FormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { StationsComponent } from './modules/stations/stations/stations.component';
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
@@ -43,8 +51,13 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 }
 
 @NgModule({
-    declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, MsalModule, BrowserAnimationsModule],
+    declarations: [AppComponent, NavMenuComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        MsalModule,
+        BrowserAnimationsModule],
     providers: [
         {
             provide: MSAL_INSTANCE,
@@ -60,4 +73,4 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -11,7 +11,7 @@ export class AppComponent {
     title = 'yx-stations';
 
     constructor(private http: HttpClient) {
-        this.loadData();
+        // this.loadData();
     }
 
     public async getMessage(): Promise<Message> {

@@ -1,0 +1,68 @@
+<div *ngIf="data.keyword === 'edit'">
+    <h3>Endre tjeneste</h3>
+    <div style="display: flex; justify-content: space-between;">
+        <mat-form-field>
+            <mat-label>Navn</mat-label>
+            <input matInput [(ngModel)]="data.service.name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Fra Dato</mat-label>
+            <input matInput [matDatepicker]="pickerOne" [(ngModel)]="data.service.fromDate">
+            <mat-datepicker-toggle matSuffix [for]="pickerOne">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #pickerOne></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Til Dato</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="data.service.toDate">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Beskrivelse</mat-label>
+            <textarea matInput cdkTextareaAutosize [(ngModel)]="data.service.description"></textarea>
+            <!-- <input matInput [(ngModel)]="data.service.description"> -->
+        </mat-form-field>
+    </div>
+</div>
+<div *ngIf="data.keyword === 'add'">
+    <h3>Legg til ny tjeneste</h3>
+    <div style="display: flex; justify-content: space-between;">
+        <mat-form-field>
+            <mat-label>Navn</mat-label>
+            <input matInput [(ngModel)]="data.service.name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Fra Dato</mat-label>
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="data.service.fromDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Til Dato</mat-label>
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="data.service.toDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Beskrivelse</mat-label>
+            <textarea matInput cdkTextareaAutosize [(ngModel)]="data.service.description"></textarea>
+            <!-- <input matInput [(ngModel)]="data.service.description"> -->
+        </mat-form-field>
+    </div>
+</div>
+<div class="row" style="text-align: -webkit-center">
+    <div class="col-6">
+        <button class="col-8" mat-raised-button [mat-dialog-close]="'close'">Avbryt</button>
+    </div>
+    <div class="col-6">
+        <button class="col-8" mat-raised-button [mat-dialog-close]>Lagre</button>
+    </div>
+</div>

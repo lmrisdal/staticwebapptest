@@ -1,4 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-action-row {
+    border-top-style: none !important;
+}
+
+.add-station:hover {
+    background-color: darkred !important;
+}
+
+.mat-dialog-container {
+    /* width: 67em !important; */
+    background-color: whitesmoke !important;
+}
+
+.mat-dialog-content {
+    overflow: inherit !important;
+}
+
+.mat-expansion-panel-header {
+    margin-bottom: 0.2em;
+}
+
+.mat-expansion-panel-header-title {
+    font-weight: 500;
+}
+
+.mat-raised-button:hover {
+    background-color: lightgray;
+}
+
+.cdk-overlay-pane {
+    overflow: auto !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

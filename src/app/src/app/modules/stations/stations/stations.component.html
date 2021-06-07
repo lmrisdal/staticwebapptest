@@ -1,2 +1,54 @@
-<p>stations works!</p>
-ASDASDASD
+<div class="col-10">
+    <mat-card class="col-12">
+        <mat-card-title>Stasjonsoversikt</mat-card-title>
+        <mat-card-content class="col-12">
+            <table class="col-12" mat-table [dataSource]="stationDetails">
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell></td>
+                </ng-container>
+                <ng-container matColumnDef="Chain">
+                    <th mat-header-cell *matHeaderCellDef>Kjede</th>
+                    <td mat-cell *matCellDef="let element">{{ element.branch }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Region">
+                    <th mat-header-cell *matHeaderCellDef>Region</th>
+                    <td mat-cell *matCellDef="let element">{{ element.region }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Stasjon">
+                    <th mat-header-cell *matHeaderCellDef>Stasjon</th>
+                    <td mat-cell *matCellDef="let element">{{ element.displayName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Type">
+                    <th mat-header-cell *matHeaderCellDef>Type</th>
+                    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Adresse">
+                    <th mat-header-cell *matHeaderCellDef>Adresse</th>
+                    <td mat-cell *matCellDef="let element">{{ element.address.street }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Sted">
+                    <th mat-header-cell *matHeaderCellDef>Sted</th>
+                    <td mat-cell *matCellDef="let element">{{ element.address.city }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Responsible">
+                    <th mat-header-cell *matHeaderCellDef>Ansvarlig</th>
+                    <td mat-cell *matCellDef="let element">{{ element.responsible }}</td>
+                </ng-container>
+                <ng-container matColumnDef="Operasjoner">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <button class="mr-2" mat-raised-button (click)="editStation('edit', row)">Endre</button>
+                        <button class="mr-2" mat-raised-button (click)="tankDetailsOpen('loss', row)">Registrer
+                            Tap</button>
+                        <button mat-raised-button (click)="tankDetailsOpen('dip', row)">Registrer Dypping</button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="tableTitles"></tr>
+                <tr mat-row *matRowDef="let row; columns: tableTitles"></tr>
+            </table>
+            <button class="add-station mt-2" mat-raised-button color="warn" (click)="editStation('add')">Legg til
+                stasjon</button>
+        </mat-card-content>
+    </mat-card>
+</div>

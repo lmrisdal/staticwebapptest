@@ -5,19 +5,19 @@ import { ErrorComponent } from './modules/pages/error/error.component';
 import { StationsComponent } from './modules/stations/stations/stations.component';
 
 const routes: Routes = [
-    {
-        path: '',
-        loadChildren: () => import('./modules/stations/stations.module').then((m) => m.StationsModule),
-        canActivateChild: [MsalGuard],
-    },
-    {
-        path: 'error',
-        component: ErrorComponent
-    },
-    {
-        path: '**',
-        component: ErrorComponent
-    },
+  {
+    path: '',
+    loadChildren: () => import('./modules/stations/stations.module').then((m) => m.StationsModule),
+    // canActivateChild: [MsalGuard],
+  },
+  // {
+  //   path: 'error',
+  //   component: ErrorComponent
+  // },
+  // {
+  //   path: '**',
+  //   component: ErrorComponent
+  // },
 ];
 
 const isIframe = window !== window.parent && !window.opener;
