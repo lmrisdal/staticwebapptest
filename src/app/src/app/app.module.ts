@@ -21,6 +21,7 @@ import {
     MsalRedirectComponent,
 } from '@azure/msal-angular';
 import { msalConfig } from './auth-config';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Here we pass the configuration parameters to create an MSAL instance.
@@ -43,7 +44,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, HttpClientModule, MsalModule],
+    imports: [BrowserModule, AppRoutingModule, HttpClientModule, MsalModule, BrowserAnimationsModule],
     providers: [
         {
             provide: MSAL_INSTANCE,
