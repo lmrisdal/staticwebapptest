@@ -5,3 +5,10 @@ tr.example-element-row:not(.example-expanded-row):hover {
 tr.example-element-row:not(.example-expanded-row):active {
     background: #efefef;
 }
+
+.title {
+    border-bottom: 1px solid #d01e38;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}

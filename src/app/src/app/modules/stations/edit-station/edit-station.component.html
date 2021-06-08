@@ -3,18 +3,33 @@
     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
         <mat-expansion-panel-header>
             <mat-panel-title class="col-4">
-                Stasjonsdetaljer
+                Generelt
             </mat-panel-title>
             <mat-panel-description class="col-8">
-                <div class="col-6">Kjede, Region, Stasjonstype...</div>
+                <div *ngIf="data.keyword==='edit'" class="col-6">{{ data.station.displayName }},
+                    {{ data.station.region }}, {{ data.station.type }}..
+                </div>
+                <div *ngIf="data.keyword==='add'" class="col-6">Stasjonsnavn, region, stasjonstype..
+                </div>
                 <mat-icon>local_gas_station</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-dialog-content>
-            <div>Generelt</div>
             <mat-form-field class="col-6">
                 <mat-label>Intern StasjonsId</mat-label>
                 <input matInput [(ngModel)]="data.station.id">
+            </mat-form-field>
+            <mat-form-field class="col-6">
+                <mat-label>StasjonsId</mat-label>
+                <input matInput [(ngModel)]="data.station.siteId">
+            </mat-form-field>
+            <mat-form-field class="col-6">
+                <mat-label>Stasjonsnavn</mat-label>
+                <input matInput [(ngModel)]="data.station.displayName" required>
+            </mat-form-field>
+            <mat-form-field class="col-6">
+                <mat-label>Stasjon Idnavn</mat-label>
+                <input matInput [(ngModel)]="data.station.name" required>
             </mat-form-field>
             <mat-form-field class="col-6">
                 <mat-label>Kjede</mat-label>
@@ -28,11 +43,41 @@
                 <mat-label>Stasjonstype</mat-label>
                 <input matInput [(ngModel)]="data.station.type">
             </mat-form-field>
+        </mat-dialog-content>
+        <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Neste</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="col-4">
+                Kontaktinformasjon
+            </mat-panel-title>
+            <mat-panel-description class="col-8">
+                <div class="col-6">Stasjonsansvarlig, eier, adresse..</div>
+                <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-dialog-content>
+            <div class="col-6 title">Kontakt Info</div>
             <mat-form-field class="col-6">
-                <mat-label>Stasjonsnavn</mat-label>
-                <input matInput [(ngModel)]="data.station.displayName" required>
+                <mat-label>Stasjonsansvarlig</mat-label>
+                <input matInput [(ngModel)]="data.station.responsible">
             </mat-form-field>
-            <div>Lokasjon</div>
+            <mat-form-field class="col-6">
+                <mat-label>Eier</mat-label>
+                <input matInput [(ngModel)]="data.station.owner">
+            </mat-form-field>
+            <mat-form-field class="col-6">
+                <mat-label>Mobil</mat-label>
+                <input matInput [(ngModel)]="data.station.phone">
+            </mat-form-field>
+            <mat-form-field class="col-6">
+                <mat-label>Epost</mat-label>
+                <input matInput [(ngModel)]="data.station.email">
+            </mat-form-field>
+            <div class="col-6 title">Lokasjon</div>
             <mat-form-field class="col-6">
                 <mat-label>Adresse</mat-label>
                 <input matInput [(ngModel)]="data.station.address.street">
@@ -49,101 +94,67 @@
                 <mat-label>Land</mat-label>
                 <input matInput [(ngModel)]="data.station.address.country">
             </mat-form-field>
-            <div>Kontakt Info</div>
             <mat-form-field class="col-6">
-                <mat-label>Mobil</mat-label>
-                <input matInput [(ngModel)]="data.station.phone">
+                <mat-label>Land</mat-label>
+                <input matInput [(ngModel)]="data.station.address.country">
             </mat-form-field>
             <mat-form-field class="col-6">
-                <mat-label>Epost</mat-label>
-                <input matInput [(ngModel)]="data.station.email">
-            </mat-form-field>
-            <!-- <div class="col-12">Geoposisjon</div>
-            <mat-form-field class="col-6">
-                <mat-label>Breddegrader</mat-label>
-                <input matInput [(ngModel)]="geoWidth">
+                <mat-label>country Iso Two Letter</mat-label>
+                <input matInput [(ngModel)]="data.station.address.countryIsoTwoLetter">
             </mat-form-field>
             <mat-form-field class="col-6">
-                <mat-label>Lengdegrader</mat-label>
-                <input matInput [(ngModel)]="geoLength">
-            </mat-form-field> -->
-            <mat-form-field class="col-6">
-                <mat-label>Stasjonsansvarlig</mat-label>
-                <!-- <input matInput [(ngModel)]="data.station.responsible"> -->
-                <input matInput type="text" [(ngModel)]="data.station.responsible" [matAutocomplete]="auto"
-                    (ngModelChange)="stationResponsibles = filterStates(data.station.responsible)" required>
-                <button *ngIf="data.station.responsible" matSuffix mat-icon-button aria-label="Clear"
-                    (click)="data.station.responsible=''">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <button
-                    *ngIf="data.station.responsible === '' || data.station.responsible === null || data.station.responsible === undefined"
-                    matSuffix mat-icon-button aria-label="Add">
-                    <mat-icon>keyboard_arrow_down</mat-icon>
-                </button>
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let responsible of stationResponsibles" [value]="responsible">
-                        {{responsible}}
-                    </mat-option>
-                </mat-autocomplete>
+                <mat-label>country Iso Three Letter</mat-label>
+                <input matInput [(ngModel)]="data.station.address.countryIsoThreeLetter">
             </mat-form-field>
+            <div class="col-6 title">Koordinater</div>
+            <div class="col-4">Breddegrad: {{ data.station.location.coordinates[0] }}</div>
+            <div class="col-4">Lengdegrad: {{ data.station.location.coordinates[1] }}</div>
         </mat-dialog-content>
         <mat-action-row>
-            <button mat-button color="primary" (click)="nextStep()">Neste</button>
-        </mat-action-row>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
-        <mat-expansion-panel-header>
-            <mat-panel-title class="col-4">
-                Tjenester
-            </mat-panel-title>
-            <mat-panel-description class="col-8">
-                <div class="col-6">Legg til, Endre, Slett</div>
-                <mat-icon>grade</mat-icon>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <!-- <table class="col-12" mat-table [dataSource]="data.station.services" multiTemplateDataRows>
-            <ng-container matColumnDef="Navn">
-                <th mat-header-cell *matHeaderCellDef>Navn</th>
-                <td mat-cell *matCellDef="let element">
-                    <input matInput [(ngModel)]="element.name" readonly></td>>
-            </ng-container>
-            <ng-container matColumnDef="Fra Dato">
-                <th mat-header-cell *matHeaderCellDef>Fra Dato</th>
-                <td mat-cell *matCellDef="let element">{{ element.fromDate | date}}</td>
-            </ng-container>
-            <ng-container matColumnDef="Til Dato">
-                <th mat-header-cell *matHeaderCellDef>Til Dato</th>
-                <td mat-cell *matCellDef="let element">{{ element.toDate | date }}</td>
-            </ng-container>
-            <ng-container matColumnDef="Beskrivelse">
-                <th mat-header-cell *matHeaderCellDef>Beskrivelse</th>
-                <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-            </ng-container>
-            <ng-container matColumnDef="Operations">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let row">
-                    <button mat-icon-button matTooltip="Endre" (click)="editService('edit', row)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Slett" (click)="deleteService(row)">
-                        <mat-icon>delete_outline</mat-icon>
-                    </button>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="tableTitles"></tr>
-            <tr mat-row *matRowDef="let row; columns: tableTitles"></tr>
-        </table> -->
-        <button class="add-station col-3 mt-2" mat-raised-button color="warn" (click)="editService('add')">Legg til
-            tjeneste</button>
-        <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Forrige</button>
+            <button mat-button style="color: #d01e38;" (click)="prevStep()">Forrige</button>
             <button mat-button color="primary" (click)="nextStep()">Neste</button>
         </mat-action-row>
     </mat-expansion-panel>
 
     <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="col-4">
+                Tjenester
+            </mat-panel-title>
+            <mat-panel-description class="col-8">
+                <div class="col-6">Stasjonens tjenester</div>
+                <mat-icon>grade</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table class="col-12" mat-table [dataSource]="data.station.services">
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef>Type</th>
+                <td mat-cell *matCellDef="let element">
+                    <input matInput>{{ element }}</td>>
+            </ng-container>
+            <ng-container matColumnDef="Operations">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <!-- <button mat-icon-button matTooltip="Endre" (click)="editService('edit', row)">
+                        <mat-icon>edit</mat-icon>
+                    </button> -->
+                    <!-- <button mat-icon-button matTooltip="Slett" (click)="deleteService(row)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button> -->
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="serviceTitles"></tr>
+            <tr mat-row *matRowDef="let row; columns: serviceTitles"></tr>
+        </table>
+        <!-- <button class="add-station col-3 mt-2" mat-raised-button color="warn" (click)="editService('add')">Legg til
+            tjeneste</button> -->
+        <mat-action-row>
+            <button mat-button style="color: #d01e38" (click)="prevStep()">Forrige</button>
+            <button mat-button color="primary" (click)="nextStep()">Neste</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <!-- <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
         <mat-expansion-panel-header>
             <mat-panel-title class="col-4">
                 Ekstern Id
@@ -153,7 +164,7 @@
                 <mat-icon>date_range</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <!-- <table class="col-12" mat-table [dataSource]="data.station.externalIds" multiTemplateDataRows>
+        <table class="col-12" mat-table [dataSource]="data.station.externalIds" multiTemplateDataRows>
             <ng-container matColumnDef="Partner">
                 <th mat-header-cell *matHeaderCellDef>Partner</th>
                 <td mat-cell *matCellDef="let element">
@@ -180,45 +191,44 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="externalTitles"></tr>
             <tr mat-row *matRowDef="let row; columns: externalTitles"></tr>
-        </table> -->
+        </table>
         <button class="add-station col-3 mt-2" mat-raised-button color="warn" (click)="editExternalId('add')">Legg til
             Id</button>
         <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Forrige</button>
             <button mat-button color="primary" (click)="nextStep()">Neste</button>
         </mat-action-row>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
     <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
         <mat-expansion-panel-header>
             <mat-panel-title class="col-4">Tanker</mat-panel-title>
-            <mat-panel-description class="col-8">
+            <mat-panel-description class="col-8" *ngIf="data.keyword === 'edit'">
                 <div class="col-6">Legg til, Endre, Slett</div>
+                <mat-icon>directions_car</mat-icon>
+            </mat-panel-description>
+            <mat-panel-description class="col-8" *ngIf="data.keyword === 'add'">
+                <div class="col-6">Legg til stasjonens tanker</div>
                 <mat-icon>directions_car</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>
         <table class="col-12" mat-table [dataSource]="data.station.tanks">
-            <ng-container matColumnDef="TankId">
-                <th mat-header-cell *matHeaderCellDef>TankId</th>
-                <td mat-cell *matCellDef="let element">
-                    <input matInput [(ngModel)]="element.tankId" readonly></td>>
-            </ng-container>
             <ng-container matColumnDef="Navn">
                 <th mat-header-cell *matHeaderCellDef>Navn</th>
                 <td mat-cell *matCellDef="let element">{{ element.name}}</td>
             </ng-container>
-            <ng-container matColumnDef="Kapasitet">
-                <th mat-header-cell *matHeaderCellDef>Kapasitet</th>
-                <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
-            </ng-container>
-            <ng-container matColumnDef="Gruppe">
-                <th mat-header-cell *matHeaderCellDef>Gruppe</th>
-                <td mat-cell *matCellDef="let element">{{ element.group }}</td>
-            </ng-container>
             <ng-container matColumnDef="Produkt">
                 <th mat-header-cell *matHeaderCellDef>Produkt</th>
-                <td mat-cell *matCellDef="let element">{{ element.product }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.fuelProductName }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Kapasitet">
+                <th mat-header-cell *matHeaderCellDef>Kapasitet</th>
+                <td mat-cell *matCellDef="let element">{{ element.Capasity }}</td>
             </ng-container>
             <ng-container matColumnDef="Autotelling">
+                <th mat-header-cell *matHeaderCellDef>Auto</th>
+                <td mat-cell *matCellDef="let element">{{ element.Auto }}</td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="Autotelling">
                 <th mat-header-cell *matHeaderCellDef>Autotelling</th>
                 <td mat-cell *matCellDef="let element">
                     <mat-checkbox class="align-self-center" [(ngModel)]="element.autoCount"></mat-checkbox>
@@ -229,11 +239,7 @@
                 <td mat-cell *matCellDef="let element">
                     <mat-checkbox class="align-self-center" [(ngModel)]="element.noDip"></mat-checkbox>
                 </td>
-            </ng-container>
-            <ng-container matColumnDef="Kommentar">
-                <th mat-header-cell *matHeaderCellDef>Kommentar</th>
-                <td mat-cell *matCellDef="let element">{{ element.comment }}</td>
-            </ng-container>
+            </ng-container> -->
             <ng-container matColumnDef="Operations">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let row">
@@ -248,14 +254,16 @@
             <tr mat-header-row *matHeaderRowDef="tankTitles"></tr>
             <tr mat-row *matRowDef="let row; columns: tankTitles"></tr>
         </table>
-        <button class="add-station col-3 mt-2" mat-raised-button color="warn" (click)="editTank('add')">Legg til
+        <button class="add-station col-3 mt-2" mat-raised-button style="background-color: #d01e38; color: white"
+            (click)="editTank('add')">Legg til
             Tank</button>
         <mat-action-row>
-            <button mat-button color="warn" (click)="prevStep()">Forrige</button>
+            <button mat-button style="color: #d01e38" (click)="prevStep()">Forrige</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
 <div class="col-12" style="display: flex; justify-content: space-between;">
     <button class="col-4 mt-2" type="button" mat-raised-button [mat-dialog-close]="'close'">Avbryt</button>
-    <button class="col-4 mt-2" type="button" mat-raised-button color="warn" [mat-dialog-close]>Lagre</button>
+    <button class="add-station col-4 mt-2" type="button" mat-raised-button
+        style="background-color: #d01e38; color: white;" [mat-dialog-close]>Lagre</button>
 </div>

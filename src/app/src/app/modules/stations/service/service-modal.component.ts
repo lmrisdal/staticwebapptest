@@ -14,7 +14,7 @@ export class ServiceModalComponent implements OnInit {
         public dialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public data: {
             'keyword': string,
-            'service': Service
+            'service': string,
         }) {
 
 
@@ -24,9 +24,8 @@ export class ServiceModalComponent implements OnInit {
         console.log(this.data.service);
     }
 
-    test(fromDate: Date) {
-        console.log(fromDate);
-        console.log(this.data.service.toDate);
+    test(test: string) {
+        console.log(test);
     }
 
 }

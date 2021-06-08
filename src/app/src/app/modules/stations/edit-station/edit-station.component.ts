@@ -12,6 +12,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServiceModalComponent } from '../service/service-modal.component';
 import { ExternalIdModalComponent } from '../external-id/externalid-modal.component';
 import { TankModalComponent } from '../tank/tank-modal.component';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
     selector: 'app-edit-station',
@@ -22,9 +23,10 @@ import { TankModalComponent } from '../tank/tank-modal.component';
 export class EditStationComponent implements OnInit {
     step = 0;
     savedStation: Station;
-    tableTitles = ['Navn', 'Fra Dato', 'Til Dato', 'Beskrivelse', 'Operations'];
+    // tableTitles = ['Navn', 'Fra Dato', 'Til Dato', 'Beskrivelse', 'Operations'];
+    serviceTitles = ['Type', 'Operations'];
     externalTitles = ['Partner', 'System', 'Id', 'Operations'];
-    tankTitles = ['TankId', 'Navn', 'Kapasitet', 'Gruppe', 'Produkt', 'Autotelling', 'Ingen dypping', 'Kommentar', 'Operations'];
+    tankTitles = ['Navn', 'Produkt', 'Kapasitet', 'Autotelling', 'Operations'];
     stationResponsibles = ['Ola Jensen', 'Kristian Nordmann', 'Martin Fjell', 'Morten Olsen'];
     geoLength: number;
     geoWidth: number;
@@ -57,10 +59,16 @@ export class EditStationComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.savedStation = Object.assign({}, this.data.station);
         console.log(this.data.station);
         console.log(this.data.station.services);
+
+        for (let cord of this.data.station.location.coordinates) {
+            console.log(cord);
+        }
     }
+
 
 
     filterStates(value: string) {
@@ -80,25 +88,27 @@ export class EditStationComponent implements OnInit {
 
     // Services
     editService(keyword: string, service?: any) {
-        // const savedServices: any = [];
-        // this.data.station.services.forEach(val => savedServices.push(Object.assign({}, val)));
-        // if (keyword === 'add') {
-        //     service = new Service();
-        //     this.data.station.services.push(service);
-        //     this.data.station.services = [...this.data.station.services]
-        // }
-        // const dialogRef = this.dialog.open(ServiceModalComponent, {
-        //     data: {
-        //         'keyword': keyword,
-        //         'service': service,
-        //     }
-        // });
+        const savedServices: any = [];
+        this.data.station.services.forEach(value => savedServices.push(value));
+        if (keyword === 'add') {
+            service = new Service();
+            this.data.station.services.push(service);
+            this.data.station.services = [...this.data.station.services]
+        }
+        const dialogRef = this.dialog.open(ServiceModalComponent, {
+            data: {
+                'keyword': keyword,
+                'service': service,
+            }
+        });
 
-        // dialogRef.afterClosed().subscribe((result: string) => {
-        //     if (result === 'close') {
-        //         this.data.station.services = savedServices;
-        //     }
-        // });
+        dialogRef.afterClosed().subscribe((result: string) => {
+            if (result === 'close') {
+                this.data.station.services = savedServices;
+            } else {
+                (console.log('hei'))
+            }
+        });
     }
     deleteService(row: Service) {
         // Swal.fire({
@@ -207,8 +217,10 @@ export class EditStationComponent implements OnInit {
                 this.data.station.tanks.splice(index, 1);
                 console.log(this.data.station.tanks);
                 this.data.station.tanks = [...this.data.station.tanks];
-                Swal.fire(
-                    'Tank slettet'
+                Swal.fire({
+                    text: 'Tank slettet',
+                    confirmButtonColor: '#6e7d88'
+                }
                 )
             }
         })

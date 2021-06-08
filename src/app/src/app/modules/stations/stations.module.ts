@@ -28,6 +28,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ExternalIdModalComponent } from './external-id/externalid-modal.component';
 import { ServiceModalComponent } from './service/service-modal.component';
 import { TankModalComponent } from './tank/tank-modal.component';
+import { GoogleMapsModule } from '@angular/google-maps'
+import { AppComponent } from 'src/app/app.component';
 
 
 
@@ -45,6 +47,7 @@ const routes: Routes = [{ path: '', component: StationsComponent }];
     imports: [
         RouterModule.forChild(routes), CommonModule,
         FormsModule,
+        GoogleMapsModule,
         MatTableModule,
         MatButtonModule,
         MatFormFieldModule,
@@ -67,6 +70,7 @@ const routes: Routes = [{ path: '', component: StationsComponent }];
         MatTooltipModule,
         MatExpansionModule,
         MatRadioModule],
+    providers: [AppComponent],
     entryComponents: [
     ],
 

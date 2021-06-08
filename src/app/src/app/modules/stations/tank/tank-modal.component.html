@@ -1,33 +1,39 @@
-<!-- <div *ngIf="data.keyword === 'edit'">
+<div *ngIf="data.keyword === 'edit'">
     <h3>Endre Tank</h3>
     <div style="display: flex; justify-content: space-between;">
         <mat-form-field>
-            <mat-label>TankId</mat-label>
-            <input matInput [(ngModel)]="data.tank.tankId">
+            <mat-label>Tank Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.id">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Gruppe Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.tankGroupId">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Navn</mat-label>
             <input matInput [(ngModel)]="data.tank.name">
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Kapasitet</mat-label>
-            <input matInput [(ngModel)]="data.tank.capacity">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Gruppe</mat-label>
-            <input matInput [(ngModel)]="data.tank.group">
+            <mat-label>Auto</mat-label>
+            <input matInput [(ngModel)]="data.tank.Auto">
         </mat-form-field>
     </div>
     <div style="display: flex; justify-content: space-between;">
         <mat-form-field>
-            <mat-label>Produkt</mat-label>
-            <input matInput [(ngModel)]="data.tank.product">
+            <mat-label>Fuel Produkt Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductId">
         </mat-form-field>
-        <mat-checkbox class="align-self-center" [(ngModel)]="data.tank.autoCount">Autotelling</mat-checkbox>
-        <mat-checkbox class="align-self-center" [(ngModel)]="data.tank.noDip">Ingen dypping</mat-checkbox>
         <mat-form-field>
-            <mat-label>Kommentar</mat-label>
-            <input matInput [(ngModel)]="data.tank.comment">
+            <mat-label>Fuel ProduktSkanol Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductSkanolProductId">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Produkt</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kapasitet</mat-label>
+            <input matInput [(ngModel)]="data.tank.Capasity">
         </mat-form-field>
     </div>
 </div>
@@ -35,32 +41,38 @@
     <h3>Legg til ny Tank</h3>
     <div style="display: flex; justify-content: space-between;">
         <mat-form-field>
-            <mat-label>TankId</mat-label>
-            <input matInput [(ngModel)]="data.tank.tankId">
+            <mat-label>Tank Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.id">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Gruppe Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.tankGroupId">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Navn</mat-label>
             <input matInput [(ngModel)]="data.tank.name">
         </mat-form-field>
         <mat-form-field>
-            <mat-label>Kapasitet</mat-label>
-            <input matInput [(ngModel)]="data.tank.capacity">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Gruppe</mat-label>
-            <input matInput [(ngModel)]="data.tank.group">
+            <mat-label>Auto</mat-label>
+            <input matInput [(ngModel)]="data.tank.Auto">
         </mat-form-field>
     </div>
     <div style="display: flex; justify-content: space-between;">
         <mat-form-field>
-            <mat-label>Produkt</mat-label>
-            <input matInput [(ngModel)]="data.tank.product">
+            <mat-label>Fuel Produkt Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductId">
         </mat-form-field>
-        <mat-checkbox class="align-self-center" [(ngModel)]="data.tank.autoCount">Autotelling</mat-checkbox>
-        <mat-checkbox class="align-self-center" [(ngModel)]="data.tank.noDip">Ingen dypping</mat-checkbox>
         <mat-form-field>
-            <mat-label>Kommentar</mat-label>
-            <input matInput [(ngModel)]="data.tank.comment">
+            <mat-label>Fuel ProduktSkanol Id</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductSkanolProductId">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Produkt</mat-label>
+            <input matInput [(ngModel)]="data.tank.fuelProductName">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kapasitet</mat-label>
+            <input matInput [(ngModel)]="data.tank.Capasity">
         </mat-form-field>
     </div>
 </div>
@@ -71,4 +83,4 @@
     <div class="col-6">
         <button class="col-8" mat-raised-button [mat-dialog-close]>Lagre</button>
     </div>
-</div> -->
+</div>
