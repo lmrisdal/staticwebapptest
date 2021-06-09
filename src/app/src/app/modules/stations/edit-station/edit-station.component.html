@@ -55,12 +55,13 @@
                 Kontaktinformasjon
             </mat-panel-title>
             <mat-panel-description class="col-8">
-                <div class="col-6">Stasjonsansvarlig, eier, adresse..</div>
+                <div class="col-6" *ngIf="data.keyword === 'edit'">{{data.station.responsible}},
+                    {{data.station.email}}..</div>
+                <div class="col-6" *ngIf="data.keyword === 'add'">Stasjonsansvarlig, email..</div>
                 <mat-icon>account_circle</mat-icon>
             </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-dialog-content>
-            <div class="col-6 title">Kontakt Info</div>
             <mat-form-field class="col-6">
                 <mat-label>Stasjonsansvarlig</mat-label>
                 <input matInput [(ngModel)]="data.station.responsible">
@@ -77,7 +78,26 @@
                 <mat-label>Epost</mat-label>
                 <input matInput [(ngModel)]="data.station.email">
             </mat-form-field>
-            <div class="col-6 title">Lokasjon</div>
+        </mat-dialog-content>
+        <mat-action-row>
+            <button mat-button style="color: #d01e38;" (click)="prevStep()">Forrige</button>
+            <button mat-button color="primary" (click)="nextStep()">Neste</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="col-4">
+                Lokasjon
+            </mat-panel-title>
+            <mat-panel-description class="col-8">
+                <div class="col-6" *ngIf="data.keyword === 'edit'"> {{ data.station.address.street }},
+                    {{ data.station.address.city }} </div>
+                <div class="col-6" *ngIf="data.keyword === 'add'"> Gateadresse, by... </div>
+                <mat-icon>location_on</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-dialog-content>
             <mat-form-field class="col-6">
                 <mat-label>Adresse</mat-label>
                 <input matInput [(ngModel)]="data.station.address.street">
@@ -107,16 +127,16 @@
                 <input matInput [(ngModel)]="data.station.address.countryIsoThreeLetter">
             </mat-form-field>
             <div class="col-6 title">Koordinater</div>
-            <div class="col-4">Breddegrad: {{ data.station.location.coordinates[0] }}</div>
-            <div class="col-4">Lengdegrad: {{ data.station.location.coordinates[1] }}</div>
+            <div class="col-4">Breddegrad: {{ data.station.location.coordinates[1] }}</div>
+            <div class="col-4">Lengdegrad: {{ data.station.location.coordinates[0] }}</div>
         </mat-dialog-content>
         <mat-action-row>
-            <button mat-button style="color: #d01e38;" (click)="prevStep()">Forrige</button>
+            <button mat-button style="color: #d01e38" (click)="prevStep()">Forrige</button>
             <button mat-button color="primary" (click)="nextStep()">Neste</button>
         </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
         <mat-expansion-panel-header>
             <mat-panel-title class="col-4">
                 Tjenester
@@ -146,6 +166,7 @@
             <tr mat-header-row *matHeaderRowDef="serviceTitles"></tr>
             <tr mat-row *matRowDef="let row; columns: serviceTitles"></tr>
         </table>
+        <div *ngIf="data.keyword === 'add'">Foreløpig ingen tjenester</div>
         <!-- <button class="add-station col-3 mt-2" mat-raised-button color="warn" (click)="editService('add')">Legg til
             tjeneste</button> -->
         <mat-action-row>
@@ -199,7 +220,7 @@
             <button mat-button color="primary" (click)="nextStep()">Neste</button>
         </mat-action-row>
     </mat-expansion-panel> -->
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)">
         <mat-expansion-panel-header>
             <mat-panel-title class="col-4">Tanker</mat-panel-title>
             <mat-panel-description class="col-8" *ngIf="data.keyword === 'edit'">
@@ -222,11 +243,11 @@
             </ng-container>
             <ng-container matColumnDef="Kapasitet">
                 <th mat-header-cell *matHeaderCellDef>Kapasitet</th>
-                <td mat-cell *matCellDef="let element">{{ element.Capasity }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
             </ng-container>
             <ng-container matColumnDef="Autotelling">
                 <th mat-header-cell *matHeaderCellDef>Auto</th>
-                <td mat-cell *matCellDef="let element">{{ element.Auto }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.auto }}</td>
             </ng-container>
             <!-- <ng-container matColumnDef="Autotelling">
                 <th mat-header-cell *matHeaderCellDef>Autotelling</th>

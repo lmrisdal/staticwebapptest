@@ -1,3 +1,14 @@
 .margin-right-button {
     margin-right: 1rem;
 }
+
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #d01e38 !important;
+    /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #d01e38 !important;
+    /*outer ring color change*/
+}

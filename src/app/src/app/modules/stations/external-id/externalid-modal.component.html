@@ -1,42 +1,36 @@
-<div *ngIf="data.keyword === 'edit'">
-    <h3>Endre Id</h3>
-    <div style="display: flex; justify-content: space-between;">
-        <mat-form-field>
-            <mat-label>Partner</mat-label>
-            <input matInput [(ngModel)]="data.externalId.partner">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>System</mat-label>
-            <input matInput [(ngModel)]="data.externalId.system">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Ekstern Id</mat-label>
-            <input matInput [(ngModel)]="data.externalId.id">
-        </mat-form-field>
-    </div>
+<div *ngIf="data.keyword === 'dip'">
+    <mat-form-field class="col-12">
+        <mat-label>Tank</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let tank of data.tanks" [value]="tank.name">{{ tank.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+        <mat-label>Kvantum</mat-label>
+        <input matInput>
+    </mat-form-field>
 </div>
-<div *ngIf="data.keyword === 'add'">
-    <h3>Legg til ny Id</h3>
-    <div style="display: flex; justify-content: space-between;">
-        <mat-form-field>
-            <mat-label>Partner</mat-label>
-            <input matInput [(ngModel)]="data.externalId.partner">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>System</mat-label>
-            <input matInput [(ngModel)]="data.externalId.system">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Ekstern Id</mat-label>
-            <input matInput [(ngModel)]="data.externalId.id">
-        </mat-form-field>
-    </div>
+<div *ngIf="data.keyword === 'loss'">
+    <mat-form-field class="col-12">
+        <mat-label>Tank</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let tank of data.tanks" [value]="tank.name">{{ tank.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+        <mat-label>Årsak</mat-label>
+        <mat-select>
+            <mat-option>Stjålet</mat-option>
+            <mat-option>Lekkasje</mat-option>
+            <mat-option>Slitasje</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-12">
+        <mat-label>Kvantum</mat-label>
+        <input matInput>
+    </mat-form-field>
 </div>
-<div class="row" style="text-align: -webkit-center">
-    <div class="col-6">
-        <button class="col-8" mat-raised-button [mat-dialog-close]="'close'">Avbryt</button>
-    </div>
-    <div class="col-6">
-        <button class="col-8" mat-raised-button [mat-dialog-close]>Lagre</button>
-    </div>
+<div class="col-12" style="display: flex; justify-content: space-between;">
+    <button class="col-4 mt-2" type="button" mat-raised-button [mat-dialog-close]="'close'">Avbryt</button>
+    <button class="col-4 mt-2" type="button" mat-raised-button [mat-dialog-close]>Lagre</button>
 </div>

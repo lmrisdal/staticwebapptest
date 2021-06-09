@@ -11,6 +11,7 @@ export class Station {
     // geoposition: GeoPosition;
     location: Location;
     type: string;
+    test: boolean;
     address: Address;
     responsible: string;
     services: string[];
@@ -18,6 +19,7 @@ export class Station {
     tanks: Tank[];
 
     constructor() {
+        this.test = false;
         this.id = 0;
         this.siteId = 0;
         this.name = '';
@@ -108,8 +110,8 @@ export class Tank {
     fuelProductSkanolProductId: number;
     fuelProductName: string;
     name: string;
-    Auto: string;
-    Capasity: number;
+    auto: string;
+    capacity: number;
 
     constructor() {
         this.id = 0;
@@ -118,7 +120,7 @@ export class Tank {
         this.fuelProductId = 0;
         this.fuelProductSkanolProductId = 0;
         this.fuelProductName = '';
-        this.Auto = 'On';
-        this.Capasity = 0;
+        this.auto = 'On';
+        this.capacity = 0;
     }
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { ExternalId, Service } from "src/app/models/station.class";
+import { ExternalId, Service, Tank } from "src/app/models/station.class";
 
 @Component({
     selector: 'app-externalid-modal',
@@ -14,14 +14,14 @@ export class ExternalIdModalComponent implements OnInit {
         public dialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) public data: {
             'keyword': string,
-            'externalId': ExternalId
+            'tanks': Tank[]
         }) {
 
 
     }
 
     ngOnInit() {
-        console.log(this.data.externalId);
+        console.log(this.data.tanks);
     }
 }
 

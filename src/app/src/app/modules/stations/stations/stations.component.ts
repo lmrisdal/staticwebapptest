@@ -1,3 +1,4 @@
+/// <reference types="@types/googlemaps" />;
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Service, Station } from 'src/app/models/station.class';
@@ -5,162 +6,9 @@ import { EditStationComponent } from '../edit-station/edit-station.component';
 import { GoogleMap } from '@angular/google-maps'
 import { AppComponent } from 'src/app/app.component';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
+import { } from '@angular/google-maps'
+import { ExternalIdModalComponent } from '../external-id/externalid-modal.component';
 
-// const ELEMENT_DATA: Station[] = [
-//     {
-//         id: 332,
-//         siteId: 10400332,
-//         name: "YX-Mones",
-//         displayName: "YX Mones",
-//         branch: "YX",
-//         region: "Sør",
-//         type: "Drivstoff",
-//         phone: "38 26 49 00",
-//         email: "mones@st.yx.no",
-//         owner: "Vidar Bergheim",
-//         responsible: "Vidar Bergheim",
-//         address: {
-//             street: "Skogsfjordveien 148",
-//             postalCode: 4513,
-//             city: "Mandal",
-//             countryIsoTwoLetter: "NOR",
-//             countryIsoThreeLetter: "NOR",
-//             country: "Norge"
-//         },
-//         location: {
-//             type: "Point",
-//             coordinates: [
-//                 7.4334901009825884,
-//                 58.03952402813606
-//             ]
-//         },
-//         services: [
-//             "95 Blyfri",
-//             "Diesel",
-//             "YX Butikk"
-//         ],
-//         tanks: [
-//             {
-//                 id: 1,
-//                 name: "Tank A1",
-//                 tankGroupId: 1,
-//                 fuelProductId: 99004,
-//                 fuelProductSkanolProductId: 2017800,
-//                 fuelProductName: "Diesel",
-//                 Capasity: 20000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 2,
-//                 name: "Tank A2",
-//                 tankGroupId: 1,
-//                 fuelProductId: 99004,
-//                 fuelProductSkanolProductId: 2017800,
-//                 fuelProductName: "Diesel",
-//                 Capasity: 25000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 3,
-//                 name: "Tank B1",
-//                 tankGroupId: 2,
-//                 fuelProductId: 99001,
-//                 fuelProductSkanolProductId: 2013200,
-//                 fuelProductName: "95 Blyfri",
-//                 Capasity: 25000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 4,
-//                 name: "Tank A3",
-//                 tankGroupId: 1,
-//                 fuelProductId: 99004,
-//                 fuelProductSkanolProductId: 2017800,
-//                 fuelProductName: "Diesel",
-//                 Capasity: 10000,
-//                 Auto: "on"
-//             }
-//         ]
-//     },
-//     {
-//         id: 353,
-//         siteId: 10400353,
-//         name: "YX-Stord",
-//         displayName: "YX Stord",
-//         branch: "YX",
-//         region: "Vest",
-//         type: "Drivstoff",
-//         phone: "53 41 26 70",
-//         email: "stord@st.yx.no",
-//         owner: "Haldis Aase",
-//         responsible: "Glenn Aase",
-//         address: {
-//             street: "Rundehaugen 15",
-//             postalCode: 5412,
-//             city: "Stord",
-//             countryIsoTwoLetter: "NOR",
-//             countryIsoThreeLetter: "NOR",
-//             country: "Norge"
-//         },
-//         location: {
-//             type: "Point",
-//             coordinates: [
-//                 5.4568209757864174,
-//                 59.763506521788514
-//             ]
-//         },
-//         services: [
-//             "98 Blyfri",
-//             "95 Blyfri",
-//             "Diesel",
-//             "Bilvask",
-//             "7-eleven"
-//         ],
-//         tanks: [
-//             {
-//                 id: 1,
-//                 name: "Tank A1",
-//                 tankGroupId: 1,
-//                 fuelProductId: 99004,
-//                 fuelProductSkanolProductId: 2017800,
-//                 fuelProductName: "Diesel",
-//                 Capasity: 15000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 2,
-//                 name: "Tank C1",
-//                 tankGroupId: 3,
-//                 fuelProductId: 99005,
-//                 fuelProductSkanolProductId: 2013100,
-//                 fuelProductName: "98 Blyfri",
-//                 Capasity: 20000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 3,
-//                 name: "Tank B1",
-//                 tankGroupId: 2,
-//                 fuelProductId: 99001,
-//                 fuelProductSkanolProductId: 2013200,
-//                 fuelProductName: "95 Blyfri",
-//                 Capasity: 30000,
-//                 Auto: "on"
-//             },
-//             {
-//                 id: 4,
-//                 name: "Tank A2",
-//                 tankGroupId: 1,
-//                 fuelProductId: 99004,
-//                 fuelProductSkanolProductId: 2017800,
-//                 fuelProductName: "Diesel",
-//                 Capasity: 30000,
-//                 Auto: "on"
-//             }
-
-//         ]
-//     }
-// ];
 
 
 @Component({
@@ -170,21 +18,21 @@ import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table
 })
 
 export class StationsComponent implements OnInit {
-    // @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
+    @ViewChild('gmap') gmapElement: any;
+    map!: google.maps.Map;
+    latitude!: number;
+    longitude!: number;
+    radioSelected: any;
+
     stationDetails!: MatTableDataSource<Station>;
-    service!: Service[];
     // center!: google.maps.LatLngLiteral;
 
-    tableTitles = ['Chain', 'Region', 'Stasjon', 'Type', 'Adresse', 'Sted', 'Responsible', 'Operasjoner'];
+    tableTitles = ['Kart', 'Chain', 'Region', 'Stasjon', 'Type', 'Adresse', 'Sted', 'Responsible', 'Operasjoner'];
 
     constructor(
         public dialog: MatDialog,
         public appService: AppComponent
     ) {
-        // this.stationDetails = [];
-        this.service = [];
-
-
 
     }
 
@@ -205,34 +53,29 @@ export class StationsComponent implements OnInit {
             const transformedFilter = filter.trim().toLowerCase();
             return dataStr.indexOf(transformedFilter) !== -1;
         }
-        // navigator.geolocation.getCurrentPosition((position) => {
-        //     this.center = {
-        //         lat: position.coords.latitude,
-        //         lng: position.coords.longitude
-        //     }
-        // })
+        let mapProp = {
+            center: new google.maps.LatLng(60.4720, 8.4689),
+            zoom: 6,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
+        this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+        const location = { lat: 60.4720, lng: 8.4689 };
+        const marker = new google.maps.Marker({
+            position: location,
+            map: this.map
+        });
+
+        const location2 = { lat: 59.763506521788514, lng: 5.4568209757864174 };
+        const marker2 = new google.maps.Marker({
+            position: location2,
+            map: this.map
+        });
 
         console.log(this.stationDetails);
     }
 
-    initMap(): void {
-        // The location of Uluru
-        const uluru = { lat: -25.344, lng: 131.036 };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(
-            document.getElementById("map") as HTMLElement,
-            {
-                zoom: 4,
-                center: uluru,
-            }
-        );
 
-        // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-            position: uluru,
-            map: map,
-        });
-    }
 
     applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
@@ -253,6 +96,26 @@ export class StationsComponent implements OnInit {
     }
 
 
+    setCenter(e: any, row: Station) {
+        if (row.location.coordinates[1] === undefined) {
+            this.latitude = 60.4720;
+            this.longitude = 8.4689;
+            this.map.setZoom(6);
+        } else {
+            this.latitude = row.location.coordinates[1];
+            this.longitude = row.location.coordinates[0];
+            this.map.setZoom(15);
+        }
+        const location = { lat: this.latitude, lng: this.longitude };
+        // e.preventDefault();
+        this.map.setCenter(new google.maps.LatLng(this.latitude, this.longitude));
+
+
+        const marker = new google.maps.Marker({
+            position: location,
+            map: this.map
+        })
+    }
 
     editStation(keyword: string, station?: Station) {
         console.log(station);
@@ -284,11 +147,11 @@ export class StationsComponent implements OnInit {
 
     tankDetailsOpen(keyword: string, stationDetail: any) {
         console.log(stationDetail);
-        // const dialogRef = this.dialog.open(TankDetailsModalComponent, {
-        //   data: {
-        //     'keyword': keyword,
-        //     'tanks': stationDetail.tanks
-        //   }
-        // })
+        const dialogRef = this.dialog.open(ExternalIdModalComponent, {
+            data: {
+                'keyword': keyword,
+                'tanks': stationDetail.tanks
+            }
+        })
     }
 }

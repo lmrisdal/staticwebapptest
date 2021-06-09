@@ -11,9 +11,14 @@
         </div>
         <mat-card-content class="col-12">
             <table class="col-12" mat-table [dataSource]="stationDetails">
-                <ng-container matColumnDef="position">
+                <ng-container matColumnDef="Kart">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell></td>
+                    <td mat-cell *matCellDef="let row" matTooltip="Posisjon på kart">
+                        <mat-radio-group [(ngModel)]="radioSelected" (change)="setCenter($event, row)">
+                            <mat-radio-button [value]="row" mat-radio-button>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </td>
                 </ng-container>
                 <ng-container matColumnDef="Chain">
                     <th mat-header-cell *matHeaderCellDef>Kjede</th>
@@ -67,3 +72,15 @@
 <!-- <google-map height="200px" width="83.5%" (mapClick)="click($event)">
 
 </google-map> -->
+<div #gmap style="width:100%;height:300px"></div>
+<!-- <form class="form-inline" #form="ngForm" (ngSubmit)="setCenter($event)" ac>
+    <div class="form-group">
+        <input type="text" class="form-control" name="latitude" [(ngModel)]="latitude" placeholder="Enter latitude"
+            required>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="longitude" [(ngModel)]="longitude" placeholder="Enter longitude"
+            required>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Go</button>
+</form> -->
